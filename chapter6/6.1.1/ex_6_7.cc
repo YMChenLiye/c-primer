@@ -4,7 +4,7 @@ using std::cout;
 using std::cin;
 using std::endl;
 
-int nums(void)
+int nums(int)
 {
 	static int cnt=0;
 
@@ -14,7 +14,7 @@ int nums(void)
 
 int main()
 {
-	for(int i=0;i<10;cout<<nums()<<endl,i++);
+	for(int i=0;i<10;cout<<nums(4)<<endl,i++);
 
 	return 0;
 }
