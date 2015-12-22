@@ -1,0 +1,5 @@
+There are no restrictions on how often an access specifier may appear.The specified access level remains in effect until the next access specifier or the end of the class body.
+
+The members which are accessible to all parts of the program should define after a public specifier.
+
+The members which are accessible to the member functions of the class but are not accessible to code that uses the class should define after a private specifier.
