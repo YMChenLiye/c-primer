@@ -1,4 +1,4 @@
-#include "class_Window_mgr.h"
+#include "myClass.h"
 
 int main()
 {
