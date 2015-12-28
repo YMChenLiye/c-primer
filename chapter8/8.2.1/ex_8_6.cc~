@@ -1,0 +1,27 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+
+using std::cout;
+using std::endl;
+using std::string;
+
+class Sales_data
+{
+public:
+	string bookNo;
+	unsigned units_sold;
+	double revenue;
+};
+
+int main(int argc,char **argv)
+{
+	if(argc != 2)
+	{
+		cout<<"wrong!<usage :"<<argv[0]<<" fileName"<<endl;
+		return -1;
+	}
+	else
+	{
+		ifstream in(argv[1]);
+
