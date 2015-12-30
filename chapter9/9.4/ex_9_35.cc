@@ -1,0 +1,5 @@
+     
+
+The size of a container is the number of elements it already holds;
+
+The capacity is how many elements it can hold before more space must be allocated
