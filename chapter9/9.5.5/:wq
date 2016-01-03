@@ -1,0 +1,18 @@
+#include <iostream>
+#include <vector>
+#include <string>
+
+using std::cout;
+using std::endl;
+using std::vector;
+using std::string;
+
+int main()
+{
+	vector<string> s{"1","2","3","4","5"};
+	int sum=0;
+	for(auto i:s) sum+=stoi(i);
+	cout<<sum<<endl;
+	return 0;
+	string numbers("0123456789");
+}
