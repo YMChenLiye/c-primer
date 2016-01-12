@@ -1,0 +1,48 @@
+
+
+
+
+
+
+#include <iostream>
+#include <vector>
+#include <memory>
+#include <string>
+using std::string;
+using std::vector;
+using std::shared_ptr;
+
+
+class StrBlobPtr{
+	public:
+		StrBlobPtr():curr(0){}
+		StrBlobPtr(StrBlob &a,size_t sz=0):wptr(a.data),curr(sz){}
+		string& deref() const;
+		StrBlobPtr& incr();
+	private:
+		shared_ptr<vector<string>> check(size_t,const string&) const;
+		std::weak_ptr<vector<string>> wptr;
+		std::size_t curr;
+};
+
+shared_ptr<vector<string>> StrBlobPtr::check(size_t sz,const string &msg) const
+{
+	auto ret=wptr.lock();
+	if(!ret)
+		throw std::runtime_error("unbound StrBlobPtr");
+	if(sz>=ret->size())
+		throw std::out_of_range(msg);
+	return ret;
+}
+
+string& StrBlobPtr::deref() const
+{
+	auto p=check(curr,"dereference past end");
+	return (*p)[curr];
+}
+
+StrBlobPtr& StrBlobPtr::incr()
+{
+	auto p=check(curr++,"increament past end of StrBlobPtr");
+	return *this;
+}
