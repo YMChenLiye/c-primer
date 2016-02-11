@@ -19,7 +19,7 @@ class String{
 		size_t length()const { return end-element-1;}
 
 	private:
-		std::allocator<char> alloc;
+		static std::allocator<char> alloc;
 		std::pair<char*,char*> alloc_n_copy(const char*,const char*);
 		void free();
 		char *element;
@@ -65,6 +65,7 @@ String::~String()
 	free();
 }
 String::String(String&& rhs) noexcept :element(rhs.element),end(rhs.end) { rhs.element=rhs.end=nullptr;  }
+/*
 String& operator=(String &&rhs) noexcept
 {
 	if(this!=&rhs)
@@ -76,6 +77,6 @@ String& operator=(String &&rhs) noexcept
 	}
 	return *this;
 }
-
+*/
 
 #endif
