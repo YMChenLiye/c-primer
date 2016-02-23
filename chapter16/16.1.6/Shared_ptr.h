@@ -2,6 +2,7 @@
 #define Shared_ptr_h
 #include <memory>
 #include <functional>
+#include "DebugDelete.h"
 
 template<typename T>
 class Shared_ptr{
@@ -22,12 +23,22 @@ class Shared_ptr{
 		Shared_ptr& operator=(Shared_ptr &&rhs) noexcept
 		{
 			decream_and_destroy();
-			std::swap(*this.ptr,rhs.ptr);
-			std::swap(*this.ref_count,rhs.ref_count);
-			std::swap(*this.deleter,rhs.deleter);
+			std::swap(this->ptr,rhs.ptr);
+			std::swap(this->ref_count,rhs.ref_count);
+			std::swap(this->deleter,rhs.deleter);
 			return *this;
 		}
-		
+	
+		Shared_ptr(std::shared_ptr<T> &&p,std::function<void(T*)> d=DebugDelete())
+		{
+			if(p.unique())
+			{
+				*this=Shared_ptr(new T(*p),d);
+			}
+			else
+				throw std::runtime_error("only unique can transfer ownership");
+		}
+
 		operator bool() const { return ptr? true: false; }
 		
 		T& operator*() const { return *ptr; }
@@ -68,7 +79,7 @@ class Shared_ptr{
 		std::size_t *ref_count;
 		std::function<void(T*)> deleter;
 
-		auto decream_and_destroy()
+		void decream_and_destroy()
 		{
 			if(ptr && 0==-*ref_count)
 			{

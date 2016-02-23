@@ -1,5 +1,8 @@
 #ifndef Unique_ptr_h
 #define Unique_ptr_h
+#include <memory>
+#include "DebugDelete.h"
+#include <functional>
 
 template<typename T,typename D=DebugDelete>
 class Unique_ptr{
@@ -9,7 +12,7 @@ class Unique_ptr{
 		
 		Unique_ptr()=default;
 		explicit Unique_ptr(T *p):ptr(p) { }
-		Unique_ptr(Unique_ptr &&rhs) noexcept:ptr(rhs.ptr) { rhs.ptr=null; }
+		Unique_ptr(Unique_ptr &&rhs) noexcept:ptr(rhs.ptr) { rhs.ptr=nullptr; }
 		Unique_ptr& operator=(Unique_ptr &&rhs) noexcept
 		{
 			if(ptr != rhs.ptr)
