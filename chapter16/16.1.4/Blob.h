@@ -2,6 +2,7 @@
 #define Blob_h
 #include <memory>
 #include <vector>
+#include <functional>
 using std::vector;
 
 template<typename> class BlobPtr;
