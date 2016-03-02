@@ -149,4 +149,4 @@ void Vec<T>::resize(std::size_t n,const T &t)
 template<typename T>
 std::allocator<T> Vec<T>::alloc;
 
-#endif
+#en
